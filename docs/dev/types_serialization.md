@@ -1,5 +1,7 @@
 ---
 title: "数据类型和序列化"
+=======
+title: "数据类型与序列化"
 nav-id: types
 nav-parent_id: dev
 nav-show_overview: true
@@ -24,17 +26,18 @@ specific language governing permissions and limitations
 under the License.
 -->
 
+
 Apache Flink 处理数据类型和序列化的方式较特别，包括自带的类型描述，一般类型提取和类型序列化框架。本文档描述这些基本概念并解释背后的相关原理。
 
 * This will be replaced by the TOC
 {:toc}
 
-## Flink 中的类型处理
 
-Flink会尝试推断出在分布式计算过程中被交换和存储的数据类型的大量信息，你可以想想就像数据库推断表的模式(schema)一样。在大多数情况下，Flink能够完美地推断出所有必须的信息，这些类型信息使得Flink可以做一些很酷的事情： 
+## Flink的类型处理
 
+Flink会尝试推断出在分布式计算过程中被交换和存储的数据类型的大量信息，你可以想想就像数据库推断表的模式一样。在大多数情况下，Flink能够完美地推断出所有必须的信息，这些类型信息使得Flink可以做一些很酷的事情： 
 * 使用POJOs类型并通过推断的字段名字(如：`dataSet.keyBy("username")`)完成分组(group)/连接(join)/
-聚合(aggregate)操作。这些类型信息使得Flink能够提前检查(如拼写错误和类型兼容性)，避免运行时才发现错误。
+聚合(aggregate)操作。这些类型信息使得Flink能够提前校验(如拼写错误和类型兼容性)避免运行时失败。
 
 * Flink知道的数据类型信息越多，序列化和数据布局方案(data layout scheme) 就越好。这对Flink的内存使用范式（memory usage paradigm）非常重要(memory usage paradigm 用于序列化出入堆中的数据，使得序列化的开销非常低)
 
